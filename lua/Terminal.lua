@@ -16,8 +16,10 @@ local function parse_roll(string)
   end
 
   -- keep the higher or lower ?
-  _, _, higher = string.find(string, "h(%d+)$")
-  _, _, lower = string.find(string, "l(%d+)$")
+  found, _, higher = string.find(string, "h(%d*)$")
+  if found ~= nil and higher == "" then higher = 1 end
+  found, _, lower = string.find(string, "l(%d*)$")
+  if found ~= nil and lower == "" then lower = 1 end
 
   return tonumber(num_dice), dice_size, tonumber(lower), tonumber(higher)
 end

@@ -41,6 +41,7 @@ decides what kind of dice is rolled. This is either an integer or 'f' for fudge/
 
 -- h<integer>/l<integer>
 Only keep the <integer> highest (h) or lowest (l) dice. The rest is discarded and not summed.
+The integer is optional, and if h or l is included, it defaults to 1
 
 - +- diceroll
 This optional parameter can be used to add or subtract the results of additional dice rolls.
@@ -53,7 +54,7 @@ Roll one normal dice.
 2d6
 Roll two normal dice and add the results.
 
-2d6h1
+2d6h
 Roll two normal dice, and pick the highest.
 
 2d6l1
