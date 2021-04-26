@@ -31,6 +31,8 @@ function Terminal:new(term)
   s.string = term
   if string.find(term, "^%d+$") then
     s.int = tonumber(term)
+  elseif string.find(term, "^%[.*%]$") then
+    s.macro = string.sub(term, 2, #term-1)
   else
     s.num_dice, s.dice_size, s.lower, s.higher = parse_roll(term)
   end
@@ -84,7 +86,16 @@ end
 -- return  string, value
 -- where string is the description and individual rolls, and value is the total result
 function Terminal:eval()
-  if(self.int ~= nil) then return self.int .. " ", self.int end
+  if(self.int ~= nil) then
+    return self.int .. " ", self.int
+  end
+
+  if(self.macro ~= nil) then
+    local expr = require'dice'.get_macro(self.macro)
+    local string_result, int_result = require'Expression'.eval(expr)
+    return "[" .. self.macro .. ": " .. string_result .. "] ", int_result
+  end
+
   return roll_dice(self.num_dice, self.dice_size, self.lower, self.higher)
 end
 

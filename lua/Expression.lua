@@ -30,7 +30,7 @@ function Expression:eval()
   -- Return terminal if there is no expression on this object:
   if self.op == "" or self.op == nil then
     return term_string_res, term_int_res
-  end 
+  end
 
   -- Eval expression:
   local expr_string_res, expr_int_res = self.expression:eval()
